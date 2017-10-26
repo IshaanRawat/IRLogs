@@ -1,0 +1,27 @@
+{
+  "name": "irlogs",
+  "version": "1.0.0",
+  "description": "A personal moment logging progressive web app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IshaanRawat/IRLogs.git"
+  },
+  "keywords": [
+    "personal",
+    "pwa",
+    "web",
+    "app",
+    "moments",
+    "ir"
+  ],
+  "author": "Ishaan Rawat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IshaanRawat/IRLogs/issues"
+  },
+  "homepage": "https://github.com/IshaanRawat/IRLogs#readme"
+}
