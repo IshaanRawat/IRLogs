@@ -3,6 +3,10 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+    font-family: "Nunito", sans-serif;
+}
+
 h1 {
     font-family: "Nunito", sans-serif;
     font-size: 28px;
@@ -44,13 +48,140 @@ h3 {
 
 p {
     font-family: "Nunito", sans-serif;
-    font-size: 18px;
+    font-size: 2vw;
     font-weight: 400;
     line-height: 1.60;
     opacity: 0.70;
     margin-top: 0px;
-    margin-bottom: 25px;
-    letter-spacing: -0.30px;
-    word-spacing: -0.10px;
+    margin-bottom: 2.2vw;
+    letter-spacing: 0vw;
+    word-spacing: .1vw;
     text-transform: none;
+}
+
+header {
+    width: 100%;
+    height: 40vh;
+    background: #2ecc70;
+    text-align: center;
+}
+
+#logo img {
+    height: 24vh;
+    margin: 2vh 0;
+}
+
+#logo-text {
+    color: white;
+    font-weight: 900;
+    font-size: 6vh;
+}
+
+aside a{
+    position: fixed;
+    z-index: 101;
+    bottom: 2vw;
+    right: 2vw;
+    color: white;
+    width: 6vw;
+    text-decoration: none;
+    background: #e74c3c;
+    border-radius: 100%;
+    padding: 0.2vw;
+    font-size: 4vw;
+    font-weight: 600;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, .2);
+    height: 6vw;
+    display: block;
+    text-align: center;
+    transition: all ease-in-out .3s;
+}
+
+aside a:hover {
+    box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, .2);
+    bottom: 2.2vw;
+}
+
+footer {
+    background: #95a5a6;
+    height: 20vh;
+    text-align: center;
+    font-size: 4vw;
+    color: white;
+    padding: 6vh;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-row-gap: 5vw;
+    padding: 5vw 0;
+}
+
+article {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    padding: 3vw;
+    background: #ecf0f1;
+    border-radius: 1vw;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+    display: block;
+    position: relative;
+}
+
+.log-location img {
+    position: absolute;
+    right: 1vw;
+    cursor: pointer;
+    width: 2.4vw;
+    bottom: 1vw;
+}
+
+section {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    background: rgba(255, 255, 255, .95);
+    top: 0;
+    left: 0;
+}
+
+section #new-title {
+    font-size: 6vh;
+    text-align: center;
+    font-weight: 600;
+    margin: 10vh 0 0 0;
+}
+
+form {
+    width: 60vw;
+    margin: 5vw auto;
+    text-align: center;
+}
+
+textarea {
+    border: none;
+    width: 100%;
+    font-size: 2vw;
+    margin-bottom: 5vw;
+    padding: 3vw;
+    border-radius: 1vw;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+}
+
+textarea:focus {
+    border: none;
+    outline: none;
+}
+
+input[type=submit] {
+    outline: none;
+    border: none;
+    background: #2ecc71;
+    color: white;
+    font-size: 1.5vw;
+    border-radius: 1vw;
+    padding: 1vw 3vw;
+    cursor: pointer;
 }
