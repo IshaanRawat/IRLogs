@@ -97,6 +97,16 @@ aside a{
     transition: all ease-in-out .3s;
 }
 
+aside a.new-modal {
+    transform: rotate(0deg);
+}
+
+aside a.close-modal {
+    transform: rotate(45deg);
+    box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, .2);
+    bottom: 2.2vw;
+}
+
 aside a:hover {
     box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, .2);
     bottom: 2.2vw;
@@ -145,6 +155,7 @@ section {
     background: rgba(255, 255, 255, .95);
     top: 0;
     left: 0;
+    display: none;
 }
 
 section #new-title {
