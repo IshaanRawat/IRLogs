@@ -131,7 +131,6 @@ main {
 article {
     grid-column-start: 2;
     grid-column-end: 3;
-    padding: 3vw;
     background: #ecf0f1;
     border-radius: 1vw;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
@@ -139,12 +138,21 @@ article {
     position: relative;
 }
 
+.log-details {
+    padding: 3vw 3vw 0 3vw;
+}
+
+.log-location {
+    padding: 0 3vw 3vw 3vw;
+}
+
 .log-location img {
-    position: absolute;
-    right: 1vw;
-    cursor: pointer;
-    width: 2.4vw;
-    bottom: 1vw;
+    float: left;
+    margin-right: 10px;
+}
+
+.log-location span {
+    opacity: .5;
 }
 
 section {
