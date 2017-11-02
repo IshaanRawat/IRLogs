@@ -1,5 +1,4 @@
 var newLogButton = document.getElementById("new-log");
-console.log(newLogButton);
 var newLogModal = document.getElementsByTagName("section")[0];
 
 function toggleNewLogView(e) {
@@ -31,3 +30,33 @@ function toggleNewLogView(e) {
 }
 
 newLogButton.addEventListener("click", toggleNewLogView);
+
+function createNewLog() {
+    var main = document.getElementsByTagName("main")[0];
+    var log = document.createElement("article");
+    var face = document.createElement("div");
+    var details = document.createElement("p");
+    var location = document.createElement("div");
+    var imgLog = document.createElement("img");
+    var imgMarker = document.createElement("img");
+    var span = document.createElement("span");
+
+    face.className = "log-face";
+    details.className = "log-details";
+    location.className = "log-location";
+    
+    var logText = document.createTextNode("Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, obcaecati.");
+    var logLocation = document.createTextNode("Lorem, ipsum dolor sit amet consectetur adipisicing elit.");
+    imgLog.src = "src/media/demo.png";
+    imgMarker.src = "src/media/marker.svg";
+
+    span.appendChild(logLocation);
+    details.appendChild(logText);
+    location.appendChild(imgMarker);
+    location.appendChild(span);
+    face.appendChild(imgLog);
+    log.appendChild(face);
+    log.appendChild(details);
+    log.appendChild(location);
+    main.appendChild(log);
+}
