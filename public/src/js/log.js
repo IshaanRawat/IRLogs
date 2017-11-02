@@ -60,3 +60,9 @@ function createNewLog() {
     log.appendChild(location);
     main.appendChild(log);
 }
+
+fetch("https://httpbin.org/get").then((response) => {
+    return response.json();
+}).then((data) => {
+    createNewLog();
+});
