@@ -138,6 +138,11 @@ article {
     position: relative;
 }
 
+.log-face img {
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+}
+
 .log-details {
     padding: 3vw 3vw 0 3vw;
 }
@@ -203,4 +208,55 @@ input[type=submit] {
     border-radius: 1vw;
     padding: 1vw 3vw;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    header {
+        height: 10vh;
+        text-align: left;
+    }
+    header .three {
+        display: none;
+    }
+    header .six {
+        margin-top: 0 !important;
+    }
+    header #logo img {
+        height: 8vh;
+        margin: 1vh 0;
+    }
+    header #logo {
+        display: inline-block;
+    }
+    header #logo-text {
+        display: inline-block;
+        position: relative;
+        top: -3.8vh;
+        left: 1vh;
+        font-size: 4vh;
+    }
+    article {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        margin: 0 5vw;
+    }
+    .log-details {
+        font-size: 3vh !important;
+    }
+    aside a {
+        width: 10vh;
+        height: 10vh;
+        font-size: 7vh;
+        padding: 0vh;
+        bottom: 2vh;
+        right: 2vh;
+    }
+    textarea {
+        padding: 3vh;
+        font-size: 5vh;
+    }
+    input[type=submit] {
+        font-size: 4vh;
+        padding: 1vh 3vh;
+    }
 }
