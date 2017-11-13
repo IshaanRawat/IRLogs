@@ -232,7 +232,7 @@ input[type=submit] {
     header #logo-text {
         display: inline-block;
         position: relative;
-        top: -3.8vh;
+        top: -3.3vh;
         left: 1vh;
         font-size: 4vh;
     }
