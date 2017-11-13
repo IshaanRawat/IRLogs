@@ -28,7 +28,8 @@ self.addEventListener("activate", (event) => {
             .then((keyList) => {
                 return Promise.all(keyList.map((key) => {
                     if(key !== "static-v2" && key !== "dynamic") {
-                        caches.delete(key);
+                        console.log("[Service Worker] Removing old cache " + key + "...");
+                        return caches.delete(key);
                     }
                 }));
             })
