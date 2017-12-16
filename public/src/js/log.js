@@ -81,6 +81,7 @@ fetch(postsURL)
     .then((response) => {
         return response.json();
     }).then((data) => {
+        console.log("From web", data);
         networkDataReceived = true;
         var dataArr = [];
         for(let key in data) {
@@ -89,20 +90,12 @@ fetch(postsURL)
         updateUI(dataArr);
     });
 
-if('caches' in window) {
-    caches.match(postsURL)
-        .then((response) => {
-            if(response) {
-                return response.json();
-            }
-        })
-        .then((data) => {
+if('indexedDB' in window) {
+    readAllData("posts")
+        .then(function(data) {
             if(!networkDataReceived) {
-                var dataArr = [];
-                for(let key in data) {
-                    dataArr.push(data[key]);
-                }
-                updateUI(dataArr);
+                console.log("From cache", data);
+                updateUI(data);
             }
-        })
+        });
 }
