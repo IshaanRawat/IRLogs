@@ -1,4 +1,5 @@
 importScripts("/src/js/idb.js");
+importScripts("/src/js/util.js");
 
 var CACHE_STATIC_VERSION = "static-v6";
 var CACHE_DYNAMIC_VERSION = "dynamic-v2";
@@ -17,12 +18,6 @@ var cachedPages = [
     "/src/media/ir.svg",
     "https://fonts.googleapis.com/css?family=Nunito:400,600,900"
 ];
-
-var dbPromise = idb.open("post-store", 1, function(db) {
-    if(!db.objectStoreNames.contains("posts")) {
-        db.createObjectStore("posts", {keyPath: "id"});
-    }
-});
 
 self.addEventListener("install", (event) => {
     console.log("[Service Worker] Installing Service Worker...", event);
@@ -60,13 +55,7 @@ self.addEventListener("fetch", (event) => {
                     clonedRes.json()
                         .then((data) => {
                             for(let key in data) {
-                                dbPromise
-                                    .then(function(db) {
-                                        var tx = db.transaction("posts", "readwrite");
-                                        var store = tx.objectStore("posts");
-                                        store.put(data[key]);
-                                        return tx.complete;
-                                    });
+                                writeData("posts", data[key]);
                             }
                         });
                     return res;
