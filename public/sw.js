@@ -50,16 +50,16 @@ self.addEventListener("fetch", (event) => {
     var url = "https://irlogs-f4861.firebaseio.com/posts";
     if(event.request.url.indexOf(url) > -1) {
         event.respondWith(fetch(event.request)
-                .then(function(res) {
-                    var clonedRes = res.clone();
-                    clonedRes.json()
-                        .then((data) => {
-                            for(let key in data) {
-                                writeData("posts", data[key]);
-                            }
-                        });
-                    return res;
-                })
+            .then(function(res) {
+                var clonedRes = res.clone();
+                clonedRes.json()
+                    .then((data) => {
+                        for(let key in data) {
+                            writeData("posts", data[key]);
+                        }
+                    });
+                return res;
+            })
         );
     } else if (cachedPages.includes(event.request.url)) {
         event.respondWith(
