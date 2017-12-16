@@ -1,4 +1,4 @@
-var CACHE_STATIC_VERSION = "static-v4";
+var CACHE_STATIC_VERSION = "static-v5";
 var CACHE_DYNAMIC_VERSION = "dynamic-v2";
 var cachedPages = [
     "/",
@@ -44,6 +44,7 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
     var url = "https://httpbin.org/get";
+    console.log(event.request.url);
     if(event.request.url.indexOf(url) > -1) {
         event.respondWith(
             caches.open(CACHE_DYNAMIC_VERSION)
@@ -54,6 +55,10 @@ self.addEventListener("fetch", (event) => {
                             return res;
                         })
                 })
+        );
+    } else if (cachedPages.includes(event.request.url)) {
+        event.respondWith(
+            caches.match(event.request)
         );
     } else {
         event.respondWith(
@@ -68,6 +73,14 @@ self.addEventListener("fetch", (event) => {
                                     .then((cache) => {
                                         cache.put(event.request.url, res.clone());
                                         return res;
+                                    })
+                            })
+                            .catch((err) => {
+                                return caches.open(CACHE_STATIC_VERSION)
+                                    .then((cache) => {
+                                        if(event.request.headers.get("accept").includes("text/html")) {
+                                            return cache.match("/offline.html");
+                                        }
                                     })
                             });
                     }
