@@ -6,10 +6,12 @@ function toggleNewLogView(e) {
     e.preventDefault();
     if(newLogButton.className === "new-modal") {
         newLogButton.className = "close-modal";
-        newLogModal.style.display = "block";
+        newLogModal.style.transform = "translateX(0) translateY(0)";
+        newLogModal.style.width = "100vw";
     } else if(newLogButton.className === "close-modal") {
         newLogButton.className = "new-modal";
-        newLogModal.style.display = "none";
+        newLogModal.style.transform = "translateX(100vw) translateY(100vh)";
+        newLogModal.style.width = "0vw";
     }
 
     //Checking if deferredPrompt is there
