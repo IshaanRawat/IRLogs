@@ -91,5 +91,5 @@ if('caches' in window) {
                 clearLogs();
                 createNewLog();
             }
-        }
+        })
 }
