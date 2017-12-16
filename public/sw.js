@@ -69,12 +69,6 @@ self.addEventListener("fetch", (event) => {
                                         cache.put(event.request.url, res.clone());
                                         return res;
                                     })
-                            })
-                            .catch((err) => {
-                                return caches.open(CACHE_STATIC_VERSION)
-                                    .then((cache) => {
-                                        return cache.match("/offline.html");
-                                    });
                             });
                     }
                 })
