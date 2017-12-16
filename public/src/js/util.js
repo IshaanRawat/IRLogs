@@ -5,7 +5,7 @@ var dbPromise = idb.open("post-store", 1, function(db) {
 });
 
 function writeData(store, data) {
-    dbPromise
+    return dbPromise
         .then(function(db) {
             var tx = db.transaction(store, "readwrite");
             var store = tx.objectStore(store);
