@@ -4,21 +4,21 @@ var dbPromise = idb.open("post-store", 1, function(db) {
     }
 });
 
-function writeData(store, data) {
+function writeData(st, data) {
     return dbPromise
         .then(function(db) {
-            var tx = db.transaction(store, "readwrite");
-            var store = tx.objectStore(store);
+            var tx = db.transaction(st, "readwrite");
+            var store = tx.objectStore(st);
             store.put(data);
             return tx.complete;
         });
 }
 
-function readData(store) {
+function readAllData(st) {
     return dbPromise
         .then(function(db) {
-            var tx = db.transaction(store, "readonly");
-            var store = tx.objectStore(store);
+            var tx = db.transaction(st, "readonly");
+            var store = tx.objectStore(st);
             return store.getAll();
         });
 }
