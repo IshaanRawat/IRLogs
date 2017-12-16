@@ -1,4 +1,4 @@
-var CACHE_STATIC_VERSION = "static-v3";
+var CACHE_STATIC_VERSION = "static-v4";
 var CACHE_DYNAMIC_VERSION = "dynamic-v2";
 var cachedPages = [
     "/",
@@ -42,22 +42,35 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-    // console.log("[Service Worker] Fetching something...", event);
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                if(response) {
-                    return response;
-                } else {
+    var url = "https://httpbin.org/get";
+    if(event.request.url.indexOf(url) > -1) {
+        event.respondWith(
+            caches.open(CACHE_DYNAMIC_VERSION)
+                .then((cache) => {
                     return fetch(event.request)
                         .then((res) => {
-                            return caches.open(CACHE_DYNAMIC_VERSION)
-                                .then((cache) => {
-                                    cache.put(event.request.url, res.clone());
-                                    return res;
-                                })
-                        });
-                }
-            })
-    );
+                            cache.put(event.request, res.clone());
+                            return res;
+                        })
+                })
+        );
+    } else {
+        event.respondWith(
+            caches.match(event.request)
+                .then((response) => {
+                    if(response) {
+                        return response;
+                    } else {
+                        return fetch(event.request)
+                            .then((res) => {
+                                return caches.open(CACHE_DYNAMIC_VERSION)
+                                    .then((cache) => {
+                                        cache.put(event.request.url, res.clone());
+                                        return res;
+                                    })
+                            });
+                    }
+                })
+        );
+    }
 });

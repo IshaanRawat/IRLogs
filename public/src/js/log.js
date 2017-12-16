@@ -61,8 +61,35 @@ function createNewLog() {
     main.appendChild(log);
 }
 
-fetch("https://httpbin.org/get").then((response) => {
-    return response.json();
-}).then((data) => {
-    createNewLog();
-});
+function clearLogs() {
+    while(main.hasChildNodes()) {
+        main.removeChild(main.lastChild);
+    }
+}
+
+var url = "https://httpbin.org/get";
+var networkDataReceived = false;
+
+fetch(url)
+    .then((response) => {
+        return response.json();
+    }).then((data) => {
+        networkDataReceived = true;
+        clearLogs();
+        createNewLog();
+    });
+
+if('caches' in window) {
+    caches.match(url)
+        .then((response) => {
+            if(response) {
+                return response.json();
+            }
+        })
+        .then((res) => {
+            if(!networkDataReceived) {
+                clearLogs();
+                createNewLog();
+            }
+        }
+}
