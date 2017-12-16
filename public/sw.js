@@ -18,6 +18,12 @@ var cachedPages = [
     "https://fonts.googleapis.com/css?family=Nunito:400,600,900"
 ];
 
+var dbPromise = idb.open("post-store", 1, function(db) {
+    if(!db.objectStoreNames.contains("posts")) {
+        db.createObjectStore("posts", {keyPath: "id"});
+    }
+});
+
 self.addEventListener("install", (event) => {
     console.log("[Service Worker] Installing Service Worker...", event);
     event.waitUntil(
@@ -48,14 +54,22 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
     var url = "https://irlogs-f4861.firebaseio.com/posts";
     if(event.request.url.indexOf(url) > -1) {
-        event.respondWith(
-            caches.open(CACHE_DYNAMIC_VERSION)
-                .then((cache) => {
-                    return fetch(event.request)
-                        .then((res) => {
-                            cache.put(event.request, res.clone());
-                            return res;
-                        })
+        event.respondWith(fetch(event.request)
+                .then(function(res) {
+                    var clonedRes = res.clone();
+                    clonedRes.json()
+                        .then((data) => {
+                            for(let key in data) {
+                                dbPromise
+                                    .then(function(db) {
+                                        var tx = db.transaction("posts", "readwrite");
+                                        var store = tx.objectStore("posts");
+                                        store.put(data[key]);
+                                        return tx.complete;
+                                    });
+                            }
+                        });
+                    return res;
                 })
         );
     } else if (cachedPages.includes(event.request.url)) {
