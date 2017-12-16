@@ -67,10 +67,10 @@ function clearLogs() {
     }
 }
 
-var url = "https://httpbin.org/get";
+var postsURL = "https://irlogs-f4861.firebaseio.com/posts.json";
 var networkDataReceived = false;
 
-fetch(url)
+fetch(postsURL)
     .then((response) => {
         return response.json();
     }).then((data) => {
@@ -80,7 +80,7 @@ fetch(url)
     });
 
 if('caches' in window) {
-    caches.match(url)
+    caches.match(postsURL)
         .then((response) => {
             if(response) {
                 return response.json();

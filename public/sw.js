@@ -43,7 +43,7 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-    var url = "https://httpbin.org/get";
+    var url = "https://irlogs-f4861.firebaseio.com/posts";
     console.log(event.request.url);
     if(event.request.url.indexOf(url) > -1) {
         event.respondWith(
