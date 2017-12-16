@@ -32,7 +32,7 @@ function toggleNewLogView(e) {
 
 newLogButton.addEventListener("click", toggleNewLogView);
 
-function createNewLog() {
+function createNewLog(post) {
     var log = document.createElement("article");
     var face = document.createElement("div");
     var details = document.createElement("p");
@@ -45,9 +45,9 @@ function createNewLog() {
     details.className = "log-details";
     location.className = "log-location";
     
-    var logText = document.createTextNode("Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, obcaecati.");
-    var logLocation = document.createTextNode("Lorem, ipsum dolor sit amet consectetur adipisicing elit.");
-    imgLog.src = "src/media/demo.png";
+    var logText = document.createTextNode(post.title);
+    var logLocation = document.createTextNode(post.location);
+    imgLog.src = post.image;
     imgMarker.src = "src/media/marker.svg";
 
     span.appendChild(logLocation);
@@ -67,6 +67,13 @@ function clearLogs() {
     }
 }
 
+function updateUI(data) {
+    clearLogs();
+    for(let post of data) {
+        createNewLog(post);
+    }
+}
+
 var postsURL = "https://irlogs-f4861.firebaseio.com/posts.json";
 var networkDataReceived = false;
 
@@ -75,8 +82,11 @@ fetch(postsURL)
         return response.json();
     }).then((data) => {
         networkDataReceived = true;
-        clearLogs();
-        createNewLog();
+        var dataArr = [];
+        for(let key in data) {
+            dataArr.push(data[key]);
+        }
+        updateUI(dataArr);
     });
 
 if('caches' in window) {
@@ -86,10 +96,13 @@ if('caches' in window) {
                 return response.json();
             }
         })
-        .then((res) => {
+        .then((data) => {
             if(!networkDataReceived) {
-                clearLogs();
-                createNewLog();
+                var dataArr = [];
+                for(let key in data) {
+                    dataArr.push(data[key]);
+                }
+                updateUI(dataArr);
             }
         })
 }

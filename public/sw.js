@@ -1,4 +1,4 @@
-var CACHE_STATIC_VERSION = "static-v5";
+var CACHE_STATIC_VERSION = "static-v6";
 var CACHE_DYNAMIC_VERSION = "dynamic-v2";
 var cachedPages = [
     "/",
@@ -44,7 +44,6 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
     var url = "https://irlogs-f4861.firebaseio.com/posts";
-    console.log(event.request.url);
     if(event.request.url.indexOf(url) > -1) {
         event.respondWith(
             caches.open(CACHE_DYNAMIC_VERSION)
