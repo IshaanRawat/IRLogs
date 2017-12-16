@@ -1,5 +1,6 @@
 var newLogButton = document.getElementById("new-log");
 var newLogModal = document.getElementsByTagName("section")[0];
+var main = document.getElementsByTagName("main")[0];
 
 function toggleNewLogView(e) {
     e.preventDefault();
@@ -32,7 +33,6 @@ function toggleNewLogView(e) {
 newLogButton.addEventListener("click", toggleNewLogView);
 
 function createNewLog() {
-    var main = document.getElementsByTagName("main")[0];
     var log = document.createElement("article");
     var face = document.createElement("div");
     var details = document.createElement("p");
