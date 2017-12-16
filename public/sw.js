@@ -3,6 +3,7 @@ var CACHE_DYNAMIC_VERSION = "dynamic-v2";
 var cachedPages = [
     "/",
     "/index.html",
+    "/offline.html",
     "/src/js/app.js",
     "/src/js/log.js",
     "/src/js/promise.js",
@@ -52,6 +53,12 @@ self.addEventListener("fetch", (event) => {
                             cache.put(event.request, res.clone());
                             return res;
                         })
+                })
+                .catch((err) => {
+                    return caches.open(CACHE_STATIC_VERSION)
+                        .then((cache) => {
+                            return cache.match("/offline.html");
+                        });
                 })
         );
     } else {
