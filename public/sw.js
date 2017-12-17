@@ -99,7 +99,7 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("sync", (event) => {
     console.log("[Service Worker] Background syncing...", event);
-    if (event.tag === "sync-logs") {
+    if (event.tag === "sync-new-logs") {
         console.log("[Service Worker] Syncing new logs...");
         event.waitUntil(
             readAllData("sync-logs")
@@ -120,8 +120,8 @@ self.addEventListener("sync", (event) => {
                         })
                     })
                     .then((res) => {
+                        console.log("Sent data to the server.", res);
                         if (res.ok) {
-                            console.log("Sent data to the server.", res);
                             deleteData("sync-logs", dt.id);
                         }
                     })
