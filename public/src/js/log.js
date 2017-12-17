@@ -112,5 +112,13 @@ form.addEventListener("submit", (event) => {
         alert("Please enter valid data.");
         return;
     }
+
     toggleNewLogView();
+
+    if ('serviceWorker' in navigator && "SyncManager" in navigator) {
+        navigator.serviceWorker.ready
+            .then((sw) => {
+                sw.sync.register("sync-new-log");
+            });
+    }
 });
