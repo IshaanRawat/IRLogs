@@ -6,7 +6,9 @@ const inputLog = document.getElementById("new-text");
 const inputLocation = document.getElementById("new-location");
 
 function toggleNewLogView(e) {
-    e.preventDefault();
+    if(e) {
+        e.preventDefault();
+    }
     if(newLogButton.className === "new-modal") {
         newLogButton.className = "close-modal";
         newLogModal.style.transform = "translateX(0) translateY(0)";
