@@ -1,6 +1,6 @@
-var newLogButton = document.getElementById("new-log");
-var newLogModal = document.getElementsByTagName("section")[0];
-var main = document.getElementsByTagName("main")[0];
+const newLogButton = document.getElementById("new-log");
+const newLogModal = document.getElementsByTagName("section")[0];
+const main = document.getElementsByTagName("main")[0];
 
 function toggleNewLogView(e) {
     e.preventDefault();
