@@ -187,7 +187,7 @@ form {
     text-align: center;
 }
 
-textarea {
+textarea, input[type=text] {
     border: none;
     width: 100%;
     font-size: 2vw;
@@ -197,7 +197,7 @@ textarea {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
 }
 
-textarea:focus {
+textarea:focus, input[type=text]:focus {
     border: none;
     outline: none;
 }
