@@ -1,6 +1,9 @@
 const newLogButton = document.getElementById("new-log");
 const newLogModal = document.getElementsByTagName("section")[0];
 const main = document.getElementsByTagName("main")[0];
+const form = document.querySelector("form");
+const inputLog = document.getElementById("new-text");
+const inputLocation = document.getElementById("new-location");
 
 function toggleNewLogView(e) {
     e.preventDefault();
@@ -101,3 +104,13 @@ if('indexedDB' in window) {
             }
         });
 }
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (inputLog.value.trim() === "" || inputLocation.value.trim() === "") {
+        alert("Please enter valid data.");
+        return;
+    }
+    toggleNewLogView();
+});
