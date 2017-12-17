@@ -125,7 +125,13 @@ form.addEventListener("submit", (event) => {
                 };
                 writeData("sync-logs", log)
                     .then(() => {
-                        sw.sync.register("sync-new-log");
+                        return sw.sync.register("sync-new-log");
+                    })
+                    .then(() => {
+                        alert("Your log has been saved for syncing.");
+                    })
+                    .catch((err) => {
+                        console.log(err);
                     });
             });
     }
