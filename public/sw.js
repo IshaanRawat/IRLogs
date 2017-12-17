@@ -52,13 +52,13 @@ self.addEventListener("fetch", (event) => {
         event.respondWith(fetch(event.request)
             .then(function(res) {
                 var clonedRes = res.clone();
-                clearAllData("posts")
+                clearAllData("logs")
                     .then(function() {
                         return clonedRes.json()       
                     })
                     .then((data) => {
                         for(let key in data) {
-                            writeData("posts", data[key]);
+                            writeData("logs", data[key]);
                         }
                     });
                 return res;
