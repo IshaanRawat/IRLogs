@@ -96,7 +96,7 @@ fetch(postsURL)
     });
 
 if('indexedDB' in window) {
-    readAllData("posts")
+    readAllData("logs")
         .then(function(data) {
             if(!networkDataReceived) {
                 console.log("From cache", data);
