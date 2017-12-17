@@ -96,3 +96,40 @@ self.addEventListener("fetch", (event) => {
         );
     }
 });
+
+self.addEventListener("sync", (event) => {
+    console.log("[Service Worker] Background syncing...", event);
+    if (event.tag === "sync-logs") {
+        console.log("[Service Worker] Syncing new logs...");
+        event.waitUntil(
+            readAllData("sync-logs")
+            .then((data) => {
+                const url = "https://irlogs-f4861.firebaseio.com/posts.json";
+                for(let dt of data) {
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            id: dt.id,
+                            title: dt.title,
+                            location: dt.location,
+                            image: "https://firebasestorage.googleapis.com/v0/b/irlogs-f4861.appspot.com/o/demo.png?alt=media&token=3ac8878a-f096-4ff0-ae4d-4596ca0e1ce8"
+                        })
+                    })
+                    .then((res) => {
+                        if (res.ok) {
+                            console.log("Sent data to the server.", res);
+                            deleteData("sync-logs", dt.id);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("Error sending the data to the server.");
+                    });
+                }
+            })
+        );
+    }
+});
