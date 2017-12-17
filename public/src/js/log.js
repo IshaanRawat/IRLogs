@@ -118,7 +118,15 @@ form.addEventListener("submit", (event) => {
     if ('serviceWorker' in navigator && "SyncManager" in navigator) {
         navigator.serviceWorker.ready
             .then((sw) => {
-                sw.sync.register("sync-new-log");
+                let log = {
+                    id: new Date().toISOString(),
+                    title: inputLog.value,
+                    location: inputLocation.value
+                };
+                writeData("sync-logs", log)
+                    .then(() => {
+                        sw.sync.register("sync-new-log");
+                    });
             });
     }
 });
