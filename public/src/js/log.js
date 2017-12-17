@@ -117,7 +117,7 @@ form.addEventListener("submit", (event) => {
 
     toggleNewLogView();
 
-    if ('serviceWorker' in navigator && "SyncManager" in navigator) {
+    if ('serviceWorker' in navigator && "SyncManager" in window) {
         navigator.serviceWorker.ready
             .then((sw) => {
                 let log = {
@@ -127,7 +127,7 @@ form.addEventListener("submit", (event) => {
                 };
                 writeData("sync-logs", log)
                     .then(() => {
-                        return sw.sync.register("sync-new-log");
+                        return sw.sync.register("sync-new-logs");
                     })
                     .then(() => {
                         alert("Your log has been saved for syncing.");
