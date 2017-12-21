@@ -122,7 +122,10 @@ self.addEventListener("sync", (event) => {
                     .then((res) => {
                         console.log("Sent data to the server.", res);
                         if (res.ok) {
-                            deleteData("sync-logs", dt.id);
+                            res.json()
+                                .then((resData) => {
+                                    deleteData("sync-logs", resData.id);
+                                });
                         }
                     })
                     .catch((err) => {
