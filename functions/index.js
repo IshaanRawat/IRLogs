@@ -6,11 +6,11 @@ const cors = require('cors')({origin: true});
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 exports.storeLogsData = functions.https.onRequest((request, response) => {
-    cors((request, response) => {
+    cors(function(request, response) {
         admin.database().ref('posts').push({
             id: request.body.id,
             title: request.body.title,
-            location: request.body.title,
+            location: request.body.location,
             image: request.body.image
         })
         .then(() => {
