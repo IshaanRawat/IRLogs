@@ -54,7 +54,7 @@ self.addEventListener("fetch", (event) => {
                 var clonedRes = res.clone();
                 clearAllData("logs")
                     .then(function() {
-                        return clonedRes.json()       
+                        return clonedRes.json()
                     })
                     .then((data) => {
                         for(let key in data) {
@@ -104,7 +104,7 @@ self.addEventListener("sync", (event) => {
         event.waitUntil(
             readAllData("sync-logs")
             .then((data) => {
-                const url = "https://irlogs-f4861.firebaseio.com/posts.json";
+                const url = "https://us-central1-irlogs-f4861.cloudfunctions.net/storeLogsData";
                 for(let dt of data) {
                     fetch(url, {
                         method: "POST",
