@@ -35,7 +35,10 @@ if("Notification" in window) {
                         .then((sw) => {
                             sw.showNotification("Successfully subscribed!", {
                                 body: "You have successfully subscribed to our notification services.",
-                                icon: "/src/media/icons/android-icon-96x96.png"
+                                icon: "/src/media/icons/android-icon-96x96.png",
+                                image: "/src/media/demo.png",
+                                badge: "/src/media/icons/android-icon-96x96.png",
+                                vibrate: [100, 50, 200]
                             });
                         });
                 }
