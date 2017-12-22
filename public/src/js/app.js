@@ -1,4 +1,5 @@
 var deferredPrompt;
+var enableNotificationBtn = document.querySelector("#notification-btn");
 
 if(!window.Promise) {
     window.Promise = Promise;
@@ -19,3 +20,17 @@ window.addEventListener("beforeinstallprompt", (event) => {
     deferredPrompt = prompt;
     return false;
 });
+
+if("Notification" in window) {
+    enableNotificationBtn.style.display = "block";
+    enableNotificationBtn.addEventListener("click", () => {
+        Notification.requestPermission((result) => {
+            console.log("User choice ", result);
+            if(result !== "granted") {
+                console.log("No notifications permission granted!");
+            } else {
+                
+            }
+        });
+    });
+}
