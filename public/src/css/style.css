@@ -215,7 +215,7 @@ input[type=submit] {
 
 #notification-btn {
     width: 200px;
-    margin: 24px auto 10px;
+    margin: 10vw auto 5vw;
     border: none;
     padding: 8px 10px;
     background: #ea4335;
