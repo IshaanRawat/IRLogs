@@ -29,7 +29,10 @@ if("Notification" in window) {
             if(result !== "granted") {
                 console.log("No notifications permission granted!");
             } else {
-                
+                enableNotificationBtn.style.display = "none";
+                new Notification("Successfully subscribed!", {
+                    body: "You have successfully subscribed to our notification services."
+                })
             }
         });
     });
