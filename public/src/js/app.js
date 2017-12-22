@@ -40,7 +40,11 @@ if("Notification" in window) {
                                 badge: "/src/media/icons/android-icon-96x96.png",
                                 vibrate: [100, 50, 200],
                                 tag: "confirm-notification",
-                                renotify: true
+                                renotify: true,
+                                actions: [
+                                    {action: "confirm", title: "Okay", icon: "/src/media/icons/android-icon-96x96.png"},
+                                    {action: "cancel", title: "Cancel", icon: "/src/media/icons/android-icon-96x96.png"}
+                                ]
                             });
                         });
                 }
