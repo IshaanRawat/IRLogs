@@ -221,6 +221,7 @@ input[type=submit] {
     background: #ea4335;
     color: white;
     border-radius: 5px;
+    display: none;
 }
 
 @media screen and (max-width: 1000px) {
