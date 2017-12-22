@@ -213,6 +213,16 @@ input[type=submit] {
     cursor: pointer;
 }
 
+#notification-btn {
+    width: 200px;
+    margin: 24px auto 10px;
+    border: none;
+    padding: 8px 10px;
+    background: #ea4335;
+    color: white;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 1000px) {
     header {
         height: 10vh;
