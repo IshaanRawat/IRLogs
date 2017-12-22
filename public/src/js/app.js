@@ -30,9 +30,14 @@ if("Notification" in window) {
                 console.log("No notifications permission granted!");
             } else {
                 enableNotificationBtn.style.display = "none";
-                new Notification("Successfully subscribed!", {
-                    body: "You have successfully subscribed to our notification services."
-                })
+                if("serviceWorker" in navigator) {
+                    navigator.serviceWorker.ready
+                        .then((sw) => {
+                            sw.showNotification("Successfully subscribed!", {
+                                body: "You have successfully subscribed to our notification services."
+                            });
+                        });
+                }
             }
         });
     });
