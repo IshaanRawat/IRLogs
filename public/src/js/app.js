@@ -34,7 +34,8 @@ if("Notification" in window) {
                     navigator.serviceWorker.ready
                         .then((sw) => {
                             sw.showNotification("Successfully subscribed!", {
-                                body: "You have successfully subscribed to our notification services."
+                                body: "You have successfully subscribed to our notification services.",
+                                icon: "/src/media/icons/android-icon-96x96.png"
                             });
                         });
                 }
