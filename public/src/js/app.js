@@ -21,7 +21,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
     return false;
 });
 
-if("Notification" in window) {
+if("Notification" in window && "serviceWorker" in navigator) {
     enableNotificationBtn.style.display = "block";
     enableNotificationBtn.addEventListener("click", () => {
         Notification.requestPermission((result) => {
