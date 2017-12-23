@@ -21,6 +21,28 @@ window.addEventListener("beforeinstallprompt", (event) => {
     return false;
 });
 
+function displayConfirmNotification() {
+    if("serviceWorker" in navigator) {
+        enableNotificationBtn.style.display = "none";
+        navigator.serviceWorker.ready
+            .then((sw) => {
+                sw.showNotification("Successfully subscribed!", {
+                    body: "You have successfully subscribed to our notification services.",
+                    icon: "/src/media/icons/android-icon-96x96.png",
+                    image: "/src/media/demo.png",
+                    badge: "/src/media/icons/android-icon-96x96.png",
+                    vibrate: [100, 50, 200],
+                    tag: "confirm-notification",
+                    renotify: true,
+                    actions: [
+                        {action: "confirm", title: "Okay", icon: "/src/media/icons/android-icon-96x96.png"},
+                        {action: "cancel", title: "Cancel", icon: "/src/media/icons/android-icon-96x96.png"}
+                    ]
+                });
+            });
+    }
+}
+
 function configurePushSub() {
     if(!("serviceWorker" in navigator)) {
         return;
@@ -47,25 +69,7 @@ if("Notification" in window && "serviceWorker" in navigator) {
             if(result !== "granted") {
                 console.log("No notifications permission granted!");
             } else {
-                enableNotificationBtn.style.display = "none";
-                if("serviceWorker" in navigator) {
-                    navigator.serviceWorker.ready
-                        .then((sw) => {
-                            sw.showNotification("Successfully subscribed!", {
-                                body: "You have successfully subscribed to our notification services.",
-                                icon: "/src/media/icons/android-icon-96x96.png",
-                                image: "/src/media/demo.png",
-                                badge: "/src/media/icons/android-icon-96x96.png",
-                                vibrate: [100, 50, 200],
-                                tag: "confirm-notification",
-                                renotify: true,
-                                actions: [
-                                    {action: "confirm", title: "Okay", icon: "/src/media/icons/android-icon-96x96.png"},
-                                    {action: "cancel", title: "Cancel", icon: "/src/media/icons/android-icon-96x96.png"}
-                                ]
-                            });
-                        });
-                }
+                displayConfirmNotification();
             }
         });
     });
