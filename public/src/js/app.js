@@ -21,6 +21,24 @@ window.addEventListener("beforeinstallprompt", (event) => {
     return false;
 });
 
+function configurePushSub() {
+    if(!("serviceWorker" in navigator)) {
+        return;
+    }
+
+    navigator.serviceWorker.ready
+        .then((sw) => {
+            return sw.pushManager.getSubscription()
+        })
+        .then((sub) => {
+            if(sub === null) {
+                // Create a new subscription
+            } else {
+                // We have a subscription
+            }
+        });
+}
+
 if("Notification" in window && "serviceWorker" in navigator) {
     enableNotificationBtn.style.display = "block";
     enableNotificationBtn.addEventListener("click", () => {
