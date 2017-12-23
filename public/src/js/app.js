@@ -27,7 +27,7 @@ function askForNotificationPermission() {
         if(result !== "granted") {
             console.log("No notifications permission granted!");
         } else {
-            displayConfirmNotification();
+            configurePushSub();
         }
     });
 }
@@ -59,16 +59,42 @@ function configurePushSub() {
         return;
     }
 
+    var sW;
     navigator.serviceWorker.ready
         .then((sw) => {
+            sW = sw;
             return sw.pushManager.getSubscription()
         })
         .then((sub) => {
             if(sub === null) {
                 // Create a new subscription
+                const vapidPublicKey = "BFl7RTnXdB7RjIZ-7fOBqA6T62WDPiQZTc8aUevddiu6DpdCzoP1B9VZ7BIpqqYca9xkUKN_vYbZR49vqmBNqMA";
+                var convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
+                return sW.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: convertedVapidPublicKey
+                });
             } else {
                 // We have a subscription
             }
+        })
+        .then((newSub) => {
+            return fetch("https://irlogs-f4861.firebaseio.com/subscriptions.json", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(newSub)
+            });
+        })
+        .then((res) => {
+            if(res.ok) {
+                displayConfirmNotification();
+            }
+        })
+        .catch((err) => {
+            console.log(err);
         });
 }
 
