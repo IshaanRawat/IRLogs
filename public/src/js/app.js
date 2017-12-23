@@ -21,6 +21,17 @@ window.addEventListener("beforeinstallprompt", (event) => {
     return false;
 });
 
+function askForNotificationPermission() {
+    Notification.requestPermission((result) => {
+        console.log("User choice ", result);
+        if(result !== "granted") {
+            console.log("No notifications permission granted!");
+        } else {
+            displayConfirmNotification();
+        }
+    });
+}
+
 function displayConfirmNotification() {
     if("serviceWorker" in navigator) {
         enableNotificationBtn.style.display = "none";
@@ -63,14 +74,5 @@ function configurePushSub() {
 
 if("Notification" in window && "serviceWorker" in navigator) {
     enableNotificationBtn.style.display = "block";
-    enableNotificationBtn.addEventListener("click", () => {
-        Notification.requestPermission((result) => {
-            console.log("User choice ", result);
-            if(result !== "granted") {
-                console.log("No notifications permission granted!");
-            } else {
-                displayConfirmNotification();
-            }
-        });
-    });
+    enableNotificationBtn.addEventListener("click", askForNotificationPermission);
 }
