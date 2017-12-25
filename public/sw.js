@@ -171,14 +171,17 @@ self.addEventListener("notificationclose", (event) => {
 
 self.addEventListener("push", (event) => {
     console.log("[Service Worker] Push Notification received!", event);
-    var data = {title: "New!", content: "Something New Happened!"};
+    var data = {title: "New!", content: "Something New Happened!", location: "/"};
     if(event.data) {
         data = JSON.parse(event.data.text());
     }
     var options = {
         body: data.content,
         icon: "/src/media/icons/android-icon-96x96.png",
-        badge: "/src/media/icons/android-icon-96x96.png"
+        badge: "/src/media/icons/android-icon-96x96.png",
+        data: {
+            location: data.location
+        }
     };
     event.waitUntil(
         self.registration.showNotification(data.title, options)
