@@ -154,10 +154,10 @@ self.addEventListener("notificationclick", (event) => {
                         return c.visibilityState === "visible";
                     });
                     if(client !== undefined) {
-                        client.navigate("http://localhost:8080");
+                        client.navigate(notification.data.location);
                         client.focus();
                     } else {
-                        clients.openWindow("http://localhost:8080");
+                        clients.openWindow(notification.data.location);
                     }
                     notification.close();
                 })
