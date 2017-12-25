@@ -182,7 +182,7 @@ section #new-title {
 }
 
 form {
-    width: 60vw;
+    width: 90vw;
     margin: 5vw auto;
     text-align: center;
 }
@@ -265,9 +265,9 @@ input[type=submit] {
         bottom: 2vh;
         right: 2vh;
     }
-    textarea {
+    textarea, input[type=text] {
         padding: 3vh;
-        font-size: 5vh;
+        font-size: 3vh;
     }
     input[type=submit] {
         font-size: 4vh;
