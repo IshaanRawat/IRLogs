@@ -37,7 +37,11 @@ exports.storeLogsData = functions.https.onRequest((request, response) => {
                         p256dh: sub.val().keys.p256dh
                     }
                 };
-                webpush.sendNotification(pushConfig, JSON.stringify({title: "New Post", content: "New Post Added!"}))
+                webpush.sendNotification(pushConfig, JSON.stringify({
+                    title: "New Post",
+                    content: "New Post Added!",
+                    location: "/"
+                }))
                 .catch((err) => {
                     console.log(err);
                 });
