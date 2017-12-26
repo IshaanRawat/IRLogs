@@ -28,7 +28,7 @@ exports.storeLogsData = functions.https.onRequest((request, response) => {
         var formData = new formidable.IncomingForm();
         formData.parse(request, function (err, fields, files) {
             fs.rename(files.image.path, "/tmp/" + files.image.name);
-            var bucket = gcs.bucket("");
+            var bucket = gcs.bucket("irlogs-f4861.appspot.com");
             bucket.upload("/tmp/" + files.image.name, {
                 uploadType: "media",
                 metadata: {
