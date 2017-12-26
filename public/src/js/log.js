@@ -25,6 +25,15 @@ function initialiseMedia() {
             });
         }
     }
+
+    navigator.mediaDevices.getUserMedia({video: true})
+        .then((stream) => {
+            videoPlayer.srcObject = stream;
+            videoPlayer.style.display = "block";
+        })
+        .catch((err) => {
+            imagePickerContainer.style.display = "block";
+        });
 }
 
 function toggleNewLogView(e) {
@@ -34,12 +43,15 @@ function toggleNewLogView(e) {
     if(newLogButton.className === "new-modal") {
         newLogButton.className = "close-modal";
         newLogModal.style.transform = "translateX(0) translateY(0)";
-        newLogModal.style.width = "100vw";\
+        newLogModal.style.width = "100vw";
         initialiseMedia();
     } else if(newLogButton.className === "close-modal") {
         newLogButton.className = "new-modal";
         newLogModal.style.transform = "translateX(100vw) translateY(100vh)";
         newLogModal.style.width = "0vw";
+        imagePickerContainer.style.display = "none";
+        videoPlayer.style.display = "none";
+        canvas.style.display = "block";
     }
 
     //Checking if deferredPrompt is there
