@@ -216,11 +216,16 @@ input[type=submit] {
 
 video, canvas {
     width: 100%;
+    display: none;
 }
 
 #image-picker, #image-capture {
     text-align: center;
     padding: 5vh 0 2vh 0;
+}
+
+#image-picker {
+    display: none;
 }
 
 .btn {
