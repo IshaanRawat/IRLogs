@@ -4,6 +4,11 @@ const main = document.getElementsByTagName("main")[0];
 const form = document.querySelector("form");
 const inputLog = document.getElementById("new-text");
 const inputLocation = document.getElementById("new-location");
+const videoPlayer = document.querySelector("section video");
+const canvas = document.querySelector("section canvas");
+const captureButton = document.querySelector("#capture");
+const imagePicker = document.querySelector("#new-image");
+const imagePickerContainer = document.querySelector("#image-picker");
 
 function toggleNewLogView(e) {
     if(e) {
