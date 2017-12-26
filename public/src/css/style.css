@@ -165,6 +165,7 @@ section {
     position: fixed;
     width: 0vw;
     height: 100vh;
+    overflow-y: scroll;
     z-index: 99;
     background: rgba(255, 255, 255, .95);
     top: 0;
@@ -217,7 +218,7 @@ video, canvas {
     width: 100%;
 }
 
-#image-picker {
+#image-picker, #image-capture {
     text-align: center;
     padding: 5vh 0 2vh 0;
 }
@@ -292,5 +293,9 @@ video, canvas {
     input[type=submit] {
         font-size: 4vh;
         padding: 1vh 3vh;
+    }
+    .btn {
+        font-size: 2.4vh;
+        padding: .8vh 2vh;
     }
 }
