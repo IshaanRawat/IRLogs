@@ -10,6 +10,23 @@ const captureButton = document.querySelector("#capture");
 const imagePicker = document.querySelector("#new-image");
 const imagePickerContainer = document.querySelector("#image-picker");
 
+function initialiseMedia() {
+    if(!("mediaDevices" in navigator)) {
+        navigator.mediaDevices = {};
+    }
+    if(!("getUserMedia" in navigator.mediaDevices)) {
+        navigator.mediaDevices.getUserMedia = function (constraints) {
+            var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            if(!getUserMedia) {
+                return Promise.reject(new Error("getUserMedia is not implemented."));   
+            }
+            return new Promise(function (resolve, reject) {
+                getUserMedia.call(navigator, constraints, resolve, reject);
+            });
+        }
+    }
+}
+
 function toggleNewLogView(e) {
     if(e) {
         e.preventDefault();
@@ -17,7 +34,8 @@ function toggleNewLogView(e) {
     if(newLogButton.className === "new-modal") {
         newLogButton.className = "close-modal";
         newLogModal.style.transform = "translateX(0) translateY(0)";
-        newLogModal.style.width = "100vw";
+        newLogModal.style.width = "100vw";\
+        initialiseMedia();
     } else if(newLogButton.className === "close-modal") {
         newLogButton.className = "new-modal";
         newLogModal.style.transform = "translateX(100vw) translateY(100vh)";
