@@ -5,7 +5,7 @@ const form = document.querySelector("form");
 const inputLog = document.getElementById("new-text");
 const inputLocation = document.getElementById("new-location");
 const videoPlayer = document.querySelector("section video");
-const canvas = document.querySelector("section canvas");
+const canvasElement = document.querySelector("section canvas");
 const captureButton = document.querySelector("#capture");
 const imagePicker = document.querySelector("#new-image");
 const imagePickerContainer = document.querySelector("#image-picker");
@@ -36,6 +36,17 @@ function initialiseMedia() {
         });
 }
 
+captureButton.addEventListener("click", function (event) {
+    canvasElement.style.display = "block";
+    videoPlayer.style.display = "none";
+    captureButton.style.display = "none";
+    var context = canvasElement.getContext("2d");
+    context.drawImage(videoPlayer, 0, 0, canvasElement.width, videoPlayer.videoHeight / (videoPlayer.videoWidth / canvasElement.width));
+    videoPlayer.srcObject.getVideoTracks().forEach(track => {
+        track.stop();
+    });
+})
+
 function toggleNewLogView(e) {
     if(e) {
         e.preventDefault();
@@ -51,7 +62,7 @@ function toggleNewLogView(e) {
         newLogModal.style.width = "0vw";
         imagePickerContainer.style.display = "none";
         videoPlayer.style.display = "none";
-        canvas.style.display = "block";
+        canvasElement.style.display = "block";
     }
 
     //Checking if deferredPrompt is there
