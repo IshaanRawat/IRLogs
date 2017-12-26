@@ -1,7 +1,7 @@
 importScripts("/src/js/idb.js");
 importScripts("/src/js/util.js");
 
-var CACHE_STATIC_VERSION = "static-v20";
+var CACHE_STATIC_VERSION = "static-v21";
 var CACHE_DYNAMIC_VERSION = "dynamic-v2";
 var cachedPages = [
     "/",
@@ -10,6 +10,7 @@ var cachedPages = [
     "/src/js/app.js",
     "/src/js/log.js",
     "/src/js/idb.js",
+    "/src/js/util.js",
     "/src/js/promise.js",
     "/src/js/fetch.js",
     "/src/css/style.css",
