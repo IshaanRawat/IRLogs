@@ -213,6 +213,26 @@ input[type=submit] {
     cursor: pointer;
 }
 
+video, canvas {
+    width: 100%;
+}
+
+#image-picker {
+    text-align: center;
+    padding: 5vh 0 2vh 0;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background: #ea4335;
+    color: white;
+    font-size: 1.2vw;
+    border-radius: 1vw;
+    padding: .8vw 2vw;
+    cursor: pointer;
+}
+
 #notification-btn {
     width: 200px;
     margin: 10vw auto 5vw;

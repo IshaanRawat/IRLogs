@@ -61,9 +61,20 @@
     </main>
     <section>
         <div id="new-title">New Log</div>
+        <div id="image-capture">
+            <video autoplay></video>
+            <canvas width="320px" height="240px"></canvas>
+            <button id="capture">Capture</button>
+        </div>
+        <div id="image-picker">
+            <h4>Pick an image instead</h4>
+            <input class="btn" type="file" name="image" id="new-image" accept="image/*">
+        </div>
         <form action="">
             <textarea name="log" id="new-text" rows="2" placeholder="Log your moment ..."></textarea>
             <input type="text" id="new-location" placeholder="Where are you right now?">
+            <input class="btn" type="button" id="new-get-location" value="Get Location">
+            <p>Getting location ...</p>
             <input type="submit" value="Submit">
         </form>
     </section>
