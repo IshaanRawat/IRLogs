@@ -9,6 +9,7 @@ const canvasElement = document.querySelector("section canvas");
 const captureButton = document.querySelector("#capture");
 const imagePicker = document.querySelector("#new-image");
 const imagePickerContainer = document.querySelector("#image-picker");
+var logCapture;
 
 function initialiseMedia() {
     if(!("mediaDevices" in navigator)) {
@@ -45,6 +46,7 @@ captureButton.addEventListener("click", function (event) {
     videoPlayer.srcObject.getVideoTracks().forEach(track => {
         track.stop();
     });
+    logCapture = dataURItoBlob(canvasElement.toDataURL());
 })
 
 function toggleNewLogView(e) {
@@ -169,7 +171,8 @@ form.addEventListener("submit", (event) => {
                 let log = {
                     id: new Date().toISOString(),
                     title: inputLog.value,
-                    location: inputLocation.value
+                    location: inputLocation.value,
+                    logCapture: logCapture
                 };
                 writeData("sync-logs", log)
                     .then(() => {

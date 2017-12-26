@@ -106,18 +106,14 @@ self.addEventListener("sync", (event) => {
             .then((data) => {
                 const url = "https://us-central1-irlogs-f4861.cloudfunctions.net/storeLogsData";
                 for(let dt of data) {
+                    var postData = new FormData();
+                    postData.append("id", dt.id);
+                    postData.append("title", dt.title);
+                    postData.append("location", dt.location);
+                    postData.append("image", dt.logCapture, dt.id + ".png");
                     fetch(url, {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json"
-                        },
-                        body: JSON.stringify({
-                            id: dt.id,
-                            title: dt.title,
-                            location: dt.location,
-                            image: "https://firebasestorage.googleapis.com/v0/b/irlogs-f4861.appspot.com/o/demo.png?alt=media&token=3ac8878a-f096-4ff0-ae4d-4596ca0e1ce8"
-                        })
+                        body: postData
                     })
                     .then((res) => {
                         console.log("Sent data to the server.", res);
